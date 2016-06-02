@@ -7,6 +7,7 @@ package aplicacion;
 
 import java.util.ArrayList;
 
+
 /**
  *
  * @author jota
@@ -18,14 +19,14 @@ public class Anuncio {
     private String titulo;
     private Usuario propietario;
     private String descripcion;
-    private String[] imagenes;
-    private float alquiler;
+    private String imagen;
+    private int alquiler;
 
-    public Anuncio(String titulo, Usuario propietario, String descripcion, String[] imagenes, float alquiler) {
+    public Anuncio(String titulo, Usuario propietario, String descripcion, String imagen, int alquiler) {
         this.titulo = titulo;
         this.propietario = propietario;
         this.descripcion = descripcion;
-        this.imagenes = imagenes;
+        this.imagen = imagen;
         this.alquiler = alquiler;
     }
 
@@ -57,19 +58,19 @@ public class Anuncio {
         this.descripcion = descripcion;
     }
 
-    public String[] getImagenes() {
-        return imagenes;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenes(String[] imagenes) {
-        this.imagenes = imagenes;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public float getAlquiler() {
         return alquiler;
     }
 
-    public void setAlquiler(float alquiler) {
+    public void setAlquiler(int alquiler) {
         this.alquiler = alquiler;
     }
     
@@ -77,18 +78,12 @@ public class Anuncio {
 
     @Override
     public String toString() {
-        String cadena="";
-        for(int i=0;i<imagenes.length;i++){
-            if(i!=2){
-               cadena+=imagenes[i]+"|"; 
-            }else{
-                cadena+=imagenes[i];
-            }
-        }
-        return "Anuncio{" + "titulo=" + titulo + ", propietario=" + propietario + ", descripcion=" + descripcion + ", imagenes=" + cadena + ", alquiler=" + alquiler + '}';
+        return "Anuncio{" + "titulo=" + titulo + ", propietario=" + propietario + ", descripcion=" + descripcion + ", imagen=" + imagen + ", alquiler=" + alquiler + '}';
     }
     
     public static void mostrarAnuncios(){
         System.out.println(anuncios.toString());
     }
+    
+    
 }

@@ -5,20 +5,28 @@
  */
 package aplicacion;
 
-import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javafx.stage.FileChooser;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
+import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
  *
  * @author jota
  */
-public class MainForm extends javax.swing.JFrame {
+public class MainForm extends javax.swing.JFrame{
 
     private static Usuario u;
 
@@ -29,30 +37,13 @@ public class MainForm extends javax.swing.JFrame {
     public static void setU(Usuario u) {
         MainForm.u = u;
     }
-    
+
     public MainForm() {
         initComponents();
         user_btn.setText(u.getNickName());
-        JPanel[] paneles=new JPanel[Anuncio.getAnuncios().size()];
-        JLabel[] titulos = new JLabel[Anuncio.getAnuncios().size()];
-        JLabel[] descripcion = new JLabel[Anuncio.getAnuncios().size()];
-        System.out.println(paneles.length);
-        
-        for(int i=0;i<paneles.length;i++){
-            
-            titulos[i]=new JLabel();
-            paneles[i]=new JPanel();
-            paneles[i].setLayout(new BoxLayout(paneles[i],BoxLayout.PAGE_AXIS));
-            
-            descripcion[i]=new JLabel();
-            titulos[i].setText(Anuncio.getAnuncios().get(i).getTitulo());
-            descripcion[i].setText(Anuncio.getAnuncios().get(i).getDescripcion());
-            paneles[i].add(titulos[i]);
-            paneles[i].add(descripcion[i]);
-        }
-        
-        for(int i=0;i<paneles.length;i++){
-            anunciosDisplay.add(paneles[i]);
+        JPanel[] paneles = diseñarAnuncio();
+        for (JPanel p : paneles) {
+            anunciosDisplay.add(p.getName(),p);
         }
     }
 
@@ -67,8 +58,8 @@ public class MainForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         user_btn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         anunciosDisplay = new javax.swing.JTabbedPane();
+        anuncioNuevo_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -80,41 +71,44 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        anuncioNuevo_btn.setText("Nuevo anuncio");
+        anuncioNuevo_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anuncioNuevo_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(anunciosDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(user_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(anuncioNuevo_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(user_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(anunciosDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(user_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(user_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anuncioNuevo_btn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(anunciosDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51))))
+                .addComponent(anunciosDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,18 +120,72 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void user_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_btnActionPerformed
-        
+
     }//GEN-LAST:event_user_btnActionPerformed
+
+    private void anuncioNuevo_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anuncioNuevo_btnActionPerformed
+        newAnuncio ob = new newAnuncio();
+        ob.setVisible(true);
+    }//GEN-LAST:event_anuncioNuevo_btnActionPerformed
+
+    private JPanel[] diseñarAnuncio() {
+        JPanel[] paneles = new JPanel[Anuncio.getAnuncios().size()];
+        JLabel[] titulos = new JLabel[Anuncio.getAnuncios().size()];
+        JTextArea[] descripcion = new JTextArea[Anuncio.getAnuncios().size()];
+        JScrollPane barra = new JScrollPane();
+        JLabel[] precios = new JLabel[Anuncio.getAnuncios().size()];
+        Anuncio a;
+        for (int i = 0; i < paneles.length; i++) {
+            a=Anuncio.getAnuncios().get(i);
+            //Instancio componentes
+            paneles[i]=new JPanel(null);
+            titulos[i]=new JLabel();
+            descripcion[i]=new JTextArea();
+            precios[i]=new JLabel();
+            //Modifico propiedades
+            paneles[i].setName(a.getTitulo());
+            titulos[i].setText(a.getTitulo());
+            titulos[i].setBounds(0, 10, 630, 40);
+            titulos[i].setHorizontalAlignment(SwingConstants.CENTER);
+            descripcion[i].setText(a.getDescripcion()+"retrrrrrrrrrrrrrrrrrrr"
+                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+            descripcion[i].setBackground(new Color(241, 169, 78 ));
+            descripcion[i].setEditable(false);
+            descripcion[i].setLineWrap(true);
+            titulos[i].setFont(new Font(Font.SANS_SERIF,Font.BOLD,30));
+            titulos[i].setForeground(new Color(	123, 141, 142  ));
+            paneles[i].setBackground(new Color(	241, 169, 78 ));
+            descripcion[i].setBounds(35, 250, 550, 100);
+            barra.add(descripcion[i]);
+            precios[i].setText(String.valueOf(a.getAlquiler())+" €/mes");
+            precios[i].setFont(new Font(Font.SANS_SERIF,Font.BOLD,34));
+            precios[i].setHorizontalAlignment(SwingConstants.CENTER);
+            precios[i].setForeground(new Color(228, 86, 65));
+            precios[i].setBounds(0, 350, 630, 50);
+            paneles[i].add(titulos[i]);
+            paneles[i].add(barra);
+            paneles[i].add(precios[i]);
+            paneles[i].add(descripcion[i]);
+            
+        }
+        
+        return paneles;
+    }
 
     /**
      * @param args the command line arguments
      */
-    
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton anuncioNuevo_btn;
     private javax.swing.JTabbedPane anunciosDisplay;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton user_btn;
     // End of variables declaration//GEN-END:variables
+
+    
 }

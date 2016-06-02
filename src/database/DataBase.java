@@ -58,6 +58,17 @@ public class DataBase {
         }
     }
 
+    public static void insertarAnuncio(Anuncio a) {
+        Statement s = null;
+        try {
+            s = conexion.createStatement();
+            s.executeUpdate("insert into anuncios values('" + a.getTitulo() + "','" + a.getPropietario().getNickName() + "','" + a.getDescripcion() + "','" + a.getImagen() + "'," + a.getAlquiler()+");");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void cerrarConexion() {
         try {
             conexion.close();
@@ -122,19 +133,19 @@ public class DataBase {
     }
 
     public static void importAnuncios() throws SQLException {
-        Statement s=conexion.createStatement();
+        Statement s = conexion.createStatement();
         ResultSet rs;
         String titulo, descripcion;
         String propietario;
-        float alquiler;
-        String[] imagenes = new String[3];
+        int alquiler;
+        String imagen;
         rs = s.executeQuery("select * from anuncios");
         while (rs.next()) {
             titulo = rs.getString("titulo");
             descripcion = rs.getString("descripcion");
             propietario = rs.getString("propietario");
-            alquiler = rs.getFloat("alquiler");
-            imagenes = rs.getString("imagenes").split(",");
+            alquiler = rs.getInt("alquiler");
+            imagen = rs.getString("imagen");
             Usuario user = null;
             for (int i = 0; i < Usuario.getUsuarios().size(); i++) {
                 if (propietario.equals(Usuario.getUsuarios().get(i).getNickName())) {
@@ -142,10 +153,11 @@ public class DataBase {
                     break;
                 }
             }
-            Anuncio.getAnuncios().add(new Anuncio(titulo, user, descripcion, imagenes, alquiler));
+            Anuncio.getAnuncios().add(new Anuncio(titulo, user, descripcion, imagen, alquiler));
         }
         rs.close();
         s.close();
 
     }
+
 }
