@@ -9,7 +9,13 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.FileChooser;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -19,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -62,7 +69,11 @@ public class MainForm extends javax.swing.JFrame{
         anuncioNuevo_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Stacey 2.0");
+        setBackground(new java.awt.Color(123, 141, 142));
         setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(123, 141, 142));
 
         user_btn.setAutoscrolls(true);
         user_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -128,17 +139,28 @@ public class MainForm extends javax.swing.JFrame{
         ob.setVisible(true);
     }//GEN-LAST:event_anuncioNuevo_btnActionPerformed
 
-    private JPanel[] diseñarAnuncio() {
+    public static  JPanel[] diseñarAnuncio() {
         JPanel[] paneles = new JPanel[Anuncio.getAnuncios().size()];
         JLabel[] titulos = new JLabel[Anuncio.getAnuncios().size()];
         JTextArea[] descripcion = new JTextArea[Anuncio.getAnuncios().size()];
-        JScrollPane barra = new JScrollPane();
+        JLabel[] imagenes = new JLabel[Anuncio.getAnuncios().size()];
+        ImageIcon img;
         JLabel[] precios = new JLabel[Anuncio.getAnuncios().size()];
+        JLabel[] propietarios = new JLabel[Anuncio.getAnuncios().size()];
+        
         Anuncio a;
         for (int i = 0; i < paneles.length; i++) {
+            imagenes[i]=new JLabel();
             a=Anuncio.getAnuncios().get(i);
+            try {
+                img=new ImageIcon(new URL(a.getImagen()));
+                imagenes[i]=new JLabel(img);
+            } catch (MalformedURLException ex) {
+                imagenes[i].setText("La imagen no se ha podido cargar");
+            }
             //Instancio componentes
             paneles[i]=new JPanel(null);
+            propietarios[i]=new JLabel();
             titulos[i]=new JLabel();
             descripcion[i]=new JTextArea();
             precios[i]=new JLabel();
@@ -156,19 +178,24 @@ public class MainForm extends javax.swing.JFrame{
             descripcion[i].setBackground(new Color(241, 169, 78 ));
             descripcion[i].setEditable(false);
             descripcion[i].setLineWrap(true);
+            propietarios[i].setText("Creado por "+a.getPropietario().getNickName());
+            propietarios[i].setBounds(430, 400, 150, 40);
+            propietarios[i].setForeground(new Color(93, 76, 70));
             titulos[i].setFont(new Font(Font.SANS_SERIF,Font.BOLD,30));
-            titulos[i].setForeground(new Color(	123, 141, 142  ));
+            titulos[i].setForeground(new Color(	93, 76, 70  ));
             paneles[i].setBackground(new Color(	241, 169, 78 ));
             descripcion[i].setBounds(35, 250, 550, 100);
-            barra.add(descripcion[i]);
+            imagenes[i].setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+            imagenes[i].setBounds(160, 60, 300, 180);
             precios[i].setText(String.valueOf(a.getAlquiler())+" €/mes");
             precios[i].setFont(new Font(Font.SANS_SERIF,Font.BOLD,34));
             precios[i].setHorizontalAlignment(SwingConstants.CENTER);
             precios[i].setForeground(new Color(228, 86, 65));
             precios[i].setBounds(0, 350, 630, 50);
             paneles[i].add(titulos[i]);
-            paneles[i].add(barra);
+            paneles[i].add(imagenes[i]);
             paneles[i].add(precios[i]);
+            paneles[i].add(propietarios[i]);
             paneles[i].add(descripcion[i]);
             
         }

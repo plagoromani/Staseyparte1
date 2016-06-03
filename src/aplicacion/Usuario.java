@@ -35,6 +35,12 @@ public class Usuario {
         return usuarios;
     }
 
+    public static void setUsuarios(ArrayList<Usuario> usuarios) {
+        Usuario.usuarios = usuarios;
+    }
+    
+    
+
     public String getNombre() {
         return nombre;
     }

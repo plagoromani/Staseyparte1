@@ -157,33 +157,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_login_btnActionPerformed
 
     private void signup_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signup_btnActionPerformed
-        JPanel panel = new JPanel();
-        panel.setSize(200, 500);
-        JTextField nickname = new JTextField(10);
-        JTextField nombre = new JTextField(10);
-        JTextField apellidos = new JTextField(10);
-        JTextField edad = new JTextField(10);
-        JTextField descripcion = new JTextField(10);
-        JPasswordField password = new JPasswordField(10);
-        panel.add(new JLabel("NickName:"));
-        panel.add(nickname);
-        panel.add(new JLabel("Nombre:"));
-        panel.add(nombre);
-        panel.add(new JLabel("Apellidos:"));
-        panel.add(apellidos);
-        panel.add(new JLabel("Edad:"));
-        panel.add(edad);
-        panel.add(new JLabel("Descripcion:"));
-        panel.add(descripcion);
-        panel.add(new JLabel("Contraseña:"));
-        panel.add(password);
-        int opcion = JOptionPane.showConfirmDialog(null, panel, "Registro", JOptionPane.OK_CANCEL_OPTION);
-        if(opcion==JOptionPane.OK_OPTION){
-            Usuario.getUsuarios().add(new Usuario(nickname.getText(),nombre.getText(),apellidos.getText(),
-            Integer.parseInt(edad.getText()),descripcion.getText(),password.getText()));
-            DataBase.insertarUsuario(nickname.getText(),nombre.getText(),apellidos.getText(),
-            edad.getText(),descripcion.getText(),password.getText());
-        }
+       NewUsuario u = new NewUsuario();
+       u.setVisible(true);
     }//GEN-LAST:event_signup_btnActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

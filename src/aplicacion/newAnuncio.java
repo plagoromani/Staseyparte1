@@ -38,11 +38,12 @@ public class newAnuncio extends javax.swing.JFrame {
         alquiler_lbl = new javax.swing.JLabel();
         titulo_txt = new javax.swing.JTextField();
         alquiler_txt = new javax.swing.JTextField();
-        loadImage = new javax.swing.JButton();
         resource_lbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcion_txt = new javax.swing.JTextArea();
         crear_btn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        imagen_txt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Anuncio");
@@ -53,13 +54,6 @@ public class newAnuncio extends javax.swing.JFrame {
         descripcion_lbl.setText("Descripción:");
 
         alquiler_lbl.setText("Alquiler:");
-
-        loadImage.setText("Load Image");
-        loadImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadImageActionPerformed(evt);
-            }
-        });
 
         descripcion_txt.setColumns(20);
         descripcion_txt.setLineWrap(true);
@@ -73,6 +67,8 @@ public class newAnuncio extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("URL Imagen:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,48 +76,63 @@ public class newAnuncio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(titulo_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(descripcion_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(alquiler_lbl)
-                            .addComponent(loadImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(143, 143, 143)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(alquiler_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(imagen_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(titulo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(alquiler_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
                                 .addComponent(resource_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(titulo_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(titulo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(alquiler_lbl))
+                                .addGap(82, 82, 82))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(descripcion_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
                         .addComponent(crear_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(titulo_lbl)
-                            .addComponent(titulo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(loadImage))
-                    .addComponent(resource_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alquiler_lbl)
-                    .addComponent(alquiler_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(titulo_lbl)
+                    .addComponent(titulo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descripcion_lbl)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(resource_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(imagen_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(alquiler_lbl))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(alquiler_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descripcion_lbl))
+                .addGap(18, 18, 18)
                 .addComponent(crear_btn)
                 .addGap(14, 14, 14))
         );
@@ -130,7 +141,7 @@ public class newAnuncio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,26 +152,16 @@ public class newAnuncio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadImageActionPerformed
-        JFileChooser fc = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
-        fc.setFileFilter(filter);
-        int option = fc.showOpenDialog(jPanel1);
-        if (option == JFileChooser.APPROVE_OPTION) {
-            resource_lbl.setText(fc.getSelectedFile().getPath());
-        }
-    }//GEN-LAST:event_loadImageActionPerformed
-
     private void crear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_btnActionPerformed
         try {
             if("".equals(alquiler_txt.getText()) || "".equals(alquiler_txt.getText()) || "".equals(descripcion_txt.getText()) || 
                     "".equals(resource_lbl.getText())){
                 throw new Exception();
             }
-            Anuncio.getAnuncios().add(new Anuncio(titulo_txt.getText(), MainForm.getU(), descripcion_txt.getText(),
-                    resource_lbl.getText(), Integer.parseInt(alquiler_txt.getText())));
-            DataBase.insertarAnuncio(new Anuncio(titulo_txt.getText(), MainForm.getU(), descripcion_txt.getText(),
-                    resource_lbl.getText(), Integer.parseInt(alquiler_txt.getText())));
+            Anuncio a = new Anuncio(titulo_txt.getText(), MainForm.getU(), descripcion_txt.getText(),
+                    imagen_txt.getText(), Integer.parseInt(alquiler_txt.getText()));
+            Anuncio.getAnuncios().add(a);
+            DataBase.insertarAnuncio(a);
             JOptionPane.showMessageDialog(this, "Anuncio creado");
             alquiler_txt.setText("");
             descripcion_txt.setText("");
@@ -180,9 +181,10 @@ public class newAnuncio extends javax.swing.JFrame {
     private javax.swing.JButton crear_btn;
     private javax.swing.JLabel descripcion_lbl;
     private javax.swing.JTextArea descripcion_txt;
+    private javax.swing.JTextField imagen_txt;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton loadImage;
     private javax.swing.JLabel resource_lbl;
     private javax.swing.JLabel titulo_lbl;
     private javax.swing.JTextField titulo_txt;

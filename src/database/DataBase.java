@@ -41,12 +41,13 @@ public class DataBase {
 
     }
 
-    public static void insertarUsuario(String nickName, String nombre, String apellidos, String edad, String descripcion, String password) {
+    public static void insertarUsuario(Usuario u) {
         Statement s = null;
         try {
             s = conexion.createStatement();
-            s.executeUpdate("insert into usuarios values('" + nickName + "','" + nombre + "','" + apellidos + "'," + edad + ",'" + descripcion
-                    + "','" + password + "');");
+            s.executeUpdate("insert into usuarios values('" + u.getNickName() + "','" + u.getNombre()
+                    + "','" + u.getApellidos() + "'," + u.getEdad() + ",'" + u.getDescripcion()
+                    + "','" + u.getPassword() + "');");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } finally {
