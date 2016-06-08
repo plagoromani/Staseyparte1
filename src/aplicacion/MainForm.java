@@ -7,26 +7,16 @@ package aplicacion;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.stage.FileChooser;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 
 /**
@@ -36,6 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MainForm extends javax.swing.JFrame{
 
     private static Usuario u;
+    JPanel[] anuncios;
 
     public static Usuario getU() {
         return u;
@@ -48,8 +39,8 @@ public class MainForm extends javax.swing.JFrame{
     public MainForm() {
         initComponents();
         user_btn.setText(u.getNickName());
-        JPanel[] paneles = diseñarAnuncio();
-        for (JPanel p : paneles) {
+        anuncios = diseñarAnuncio();
+        for (JPanel p : anuncios) {
             anunciosDisplay.add(p.getName(),p);
         }
     }
@@ -67,6 +58,7 @@ public class MainForm extends javax.swing.JFrame{
         user_btn = new javax.swing.JButton();
         anunciosDisplay = new javax.swing.JTabbedPane();
         anuncioNuevo_btn = new javax.swing.JButton();
+        refresh_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stacey 2.0");
@@ -76,6 +68,7 @@ public class MainForm extends javax.swing.JFrame{
         jPanel1.setBackground(new java.awt.Color(123, 141, 142));
 
         user_btn.setAutoscrolls(true);
+        user_btn.setMaximumSize(new java.awt.Dimension(60, 16));
         user_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 user_btnActionPerformed(evt);
@@ -89,6 +82,13 @@ public class MainForm extends javax.swing.JFrame{
             }
         });
 
+        refresh_btn.setText("Refrescar");
+        refresh_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refresh_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,8 +98,10 @@ public class MainForm extends javax.swing.JFrame{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(anuncioNuevo_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(refresh_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(user_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(user_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(anunciosDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -109,7 +111,9 @@ public class MainForm extends javax.swing.JFrame{
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(user_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(anuncioNuevo_btn))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(anuncioNuevo_btn)
+                        .addComponent(refresh_btn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(anunciosDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
@@ -131,13 +135,22 @@ public class MainForm extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void user_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_btnActionPerformed
-
+        UserData form = new UserData();
+        form.setVisible(true);
     }//GEN-LAST:event_user_btnActionPerformed
 
     private void anuncioNuevo_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anuncioNuevo_btnActionPerformed
         newAnuncio ob = new newAnuncio();
         ob.setVisible(true);
     }//GEN-LAST:event_anuncioNuevo_btnActionPerformed
+
+    private void refresh_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refresh_btnActionPerformed
+        anuncios = diseñarAnuncio();
+        anunciosDisplay.removeAll();
+        for (JPanel p : anuncios) {
+            anunciosDisplay.add(p.getName(),p);
+        }
+    }//GEN-LAST:event_refresh_btnActionPerformed
 
     public static  JPanel[] diseñarAnuncio() {
         JPanel[] paneles = new JPanel[Anuncio.getAnuncios().size()];
@@ -169,12 +182,7 @@ public class MainForm extends javax.swing.JFrame{
             titulos[i].setText(a.getTitulo());
             titulos[i].setBounds(0, 10, 630, 40);
             titulos[i].setHorizontalAlignment(SwingConstants.CENTER);
-            descripcion[i].setText(a.getDescripcion()+"retrrrrrrrrrrrrrrrrrrr"
-                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-                    + "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+            descripcion[i].setText(a.getDescripcion());
             descripcion[i].setBackground(new Color(241, 169, 78 ));
             descripcion[i].setEditable(false);
             descripcion[i].setLineWrap(true);
@@ -211,6 +219,7 @@ public class MainForm extends javax.swing.JFrame{
     private javax.swing.JButton anuncioNuevo_btn;
     private javax.swing.JTabbedPane anunciosDisplay;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton refresh_btn;
     private javax.swing.JButton user_btn;
     // End of variables declaration//GEN-END:variables
 

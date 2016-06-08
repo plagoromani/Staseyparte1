@@ -155,7 +155,7 @@ public class newAnuncio extends javax.swing.JFrame {
     private void crear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_btnActionPerformed
         try {
             if("".equals(alquiler_txt.getText()) || "".equals(alquiler_txt.getText()) || "".equals(descripcion_txt.getText()) || 
-                    "".equals(resource_lbl.getText())){
+                    "".equals(imagen_txt.getText())){
                 throw new Exception();
             }
             Anuncio a = new Anuncio(titulo_txt.getText(), MainForm.getU(), descripcion_txt.getText(),
